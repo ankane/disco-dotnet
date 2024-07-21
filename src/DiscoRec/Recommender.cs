@@ -133,7 +133,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
 
         var factors = options.Factors;
         var loss = isImplicit ? MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass : MatrixFactorizationTrainer.LossFunctionType.SquareLossRegression;
-        var quiet = options.Verbose ?? validSet == null;
+        var verbose = options.Verbose ?? validSet != null;
 
         var trainerOptions = new MatrixFactorizationTrainer.Options
         {
@@ -142,7 +142,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
             LabelColumnName = schema[2].ColumnName,
             NumberOfIterations = options.Iterations,
             ApproximationRank = factors,
-            Quiet = quiet,
+            Quiet = !verbose,
             LossFunction = loss
         };
         var trainer = mlContext.Recommendation().Trainers.MatrixFactorization(trainerOptions);
