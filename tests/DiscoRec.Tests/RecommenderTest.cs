@@ -63,11 +63,11 @@ public class RecommenderTest
     public void TestItemRecsSameScore()
     {
         var data = new Dataset<int, string>();
-        data.Add(1, "A", 1.0f);
-        data.Add(1, "B", 1.0f);
-        data.Add(2, "C", 1.0f);
+        data.Add(1, "A");
+        data.Add(1, "B");
+        data.Add(2, "C");
 
-        var recommender = Recommender<int, string>.FitExplicit(data);
+        var recommender = Recommender<int, string>.FitImplicit(data);
 
         var itemIds = recommender.ItemRecs("A", 5).Select((r) => r.Id).ToList();
         Assert.Equal(new string[] { "B", "C" }, itemIds);
