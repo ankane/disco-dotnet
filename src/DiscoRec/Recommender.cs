@@ -112,6 +112,8 @@ public class Recommender<T, U> where T : notnull where U : notnull
         var globalMean = isImplicit ? 0 : input.Sum((v) => v.Label) / input.Count;
 
         MLContext mlContext = new MLContext();
+        // for debugging
+        // mlContext.Log += (sender, e) => Console.WriteLine(e.Message);
         var schema = SchemaDefinition.Create(typeof(MatrixValue));
         schema[0].ColumnType = new KeyDataViewType(typeof(uint), users);
         schema[1].ColumnType = new KeyDataViewType(typeof(uint), items);
