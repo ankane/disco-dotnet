@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{75115B90-644B-41FD-B4B3-FE3B0D94EDB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscoRec", "src\DiscoRec\DiscoRec.csproj", "{F29E02CE-DEB7-4FFE-A407-D25E5B82E68B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{315AB2EA-A91D-4A7F-9064-970865E8261D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscoRec.Tests", "tests\DiscoRec.Tests\DiscoRec.Tests.csproj", "{16F57F6D-BC55-4DEB-918B-E3B9C1C945AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F29E02CE-DEB7-4FFE-A407-D25E5B82E68B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29E02CE-DEB7-4FFE-A407-D25E5B82E68B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29E02CE-DEB7-4FFE-A407-D25E5B82E68B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29E02CE-DEB7-4FFE-A407-D25E5B82E68B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F57F6D-BC55-4DEB-918B-E3B9C1C945AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F57F6D-BC55-4DEB-918B-E3B9C1C945AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F57F6D-BC55-4DEB-918B-E3B9C1C945AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F57F6D-BC55-4DEB-918B-E3B9C1C945AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F29E02CE-DEB7-4FFE-A407-D25E5B82E68B} = {75115B90-644B-41FD-B4B3-FE3B0D94EDB3}
+		{16F57F6D-BC55-4DEB-918B-E3B9C1C945AD} = {315AB2EA-A91D-4A7F-9064-970865E8261D}
+	EndGlobalSection
+EndGlobal
