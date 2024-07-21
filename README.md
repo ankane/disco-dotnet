@@ -110,7 +110,7 @@ foreach (var rec in recs)
 
 Save recommendations to your database.
 
-Alternatively, you can store only the factors and use a library like [pgvector-dotnet](https://github.com/pgvector/pgvector-dotnet). See an [example](https://github.com/pgvector/pgvector-dotnet/blob/master/examples/disco/Program.cs).
+Alternatively, you can store only the factors and use a library like [pgvector-dotnet](https://github.com/pgvector/pgvector-dotnet). See an [example](https://github.com/pgvector/pgvector-dotnet/blob/master/examples/Disco/Program.cs).
 
 ## Algorithms
 
