@@ -146,9 +146,6 @@ public class Recommender<T, U> where T : notnull where U : notnull
             LossFunction = loss
         };
         var trainer = mlContext.Recommendation().Trainers.MatrixFactorization(trainerOptions);
-        // https://github.com/dotnet/machinelearning/pull/7196
-        if (validView != null)
-            throw new NotSupportedException("This functionality is currently unavailable");
         var model = trainer.Fit(trainView, validView);
 
         var userFactors = new Matrix(users, factors, model.Model.LeftFactorMatrix.ToArray());

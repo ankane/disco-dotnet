@@ -121,8 +121,7 @@ public class RecommenderTest
         var (trainSet, validSet) = data.SplitRandom(0.8f);
         Assert.Equal(80000, trainSet.Count);
         Assert.Equal(20000, validSet.Count);
-        // https://github.com/dotnet/machinelearning/pull/7196
-        // Recommender<int, string>.FitExplicit(trainSet, validSet);
+        Recommender<int, string>.FitExplicit(trainSet, validSet, new RecommenderOptions { Factors = 20, Verbose = false });
     }
 
     [Fact]
