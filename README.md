@@ -70,7 +70,7 @@ Get item-based recommendations - “users who liked this item also liked”
 recommender.ItemRecs(itemId, 5);
 ```
 
-Get predicted ratings for a specific user and item
+Get the predicted rating for a specific user and item
 
 ```csharp
 recommender.Predict(userId, itemId);
