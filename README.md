@@ -101,7 +101,7 @@ var recommender = Recommender<int, string>.FitExplicit(data, new RecommenderOpti
 Get similar movies
 
 ```csharp
-var recs = recommender.ItemRecs("Star Wars (1977)");
+var recs = recommender.ItemRecs("Star Wars (1977)", 5);
 foreach (var rec in recs)
     Console.WriteLine("{0}: {1}", rec.Id, rec.Score);
 ```
