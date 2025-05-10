@@ -168,7 +168,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
             predictions.Add(new Rec<int>(j, Dot(factors, itemFactors.Row(j))));
         predictions = predictions.OrderBy((v) => -v.Score).Take(count + rated.Count).ToList();
 
-        var recs = new List<Rec<U>>(count);
+        var recs = new List<Rec<U>>(count + rated.Count);
         foreach (var prediction in predictions)
         {
             if (!rated.Contains(prediction.Id))
@@ -248,7 +248,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         }
         predictions = predictions.OrderBy((v) => -v.Score).Take(count + 1).ToList();
 
-        var recs = new List<Rec<V>>(count);
+        var recs = new List<Rec<V>>(count + 1);
         foreach (var prediction in predictions)
         {
             if (prediction.Id != i)
