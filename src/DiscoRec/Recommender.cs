@@ -163,13 +163,12 @@ public class Recommender<T, U> where T : notnull where U : notnull
         var rated = Rated[u.Value];
         var factors = userFactors.Row((int)u.Value);
 
-        var predictions = new List<Rec<int>>();
+        var predictions = new List<Rec<int>>(itemFactors.Rows);
         for (var j = 0; j < itemFactors.Rows; j++)
             predictions.Add(new Rec<int>(j, Dot(factors, itemFactors.Row(j))));
-        predictions = predictions.OrderBy((v) => -v.Score).ToList();
-        predictions = predictions.Take(count + rated.Count).ToList();
+        predictions = predictions.OrderBy((v) => -v.Score).Take(count + rated.Count).ToList();
 
-        var recs = new List<Rec<U>>();
+        var recs = new List<Rec<U>>(count);
         foreach (var prediction in predictions)
         {
             if (!rated.Contains(prediction.Id))
@@ -239,7 +238,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         var rowFactors = factors.Row(i.Value);
         var rowNorm = norms[i.Value];
 
-        var predictions = new List<Rec<int>>();
+        var predictions = new List<Rec<int>>(factors.Rows);
         for (var j = 0; j < factors.Rows; j++)
         {
             var denom = rowNorm * norms[j];
@@ -247,10 +246,9 @@ public class Recommender<T, U> where T : notnull where U : notnull
                 denom = 0.00001f;
             predictions.Add(new Rec<int>(j, Dot(rowFactors, factors.Row(j)) / denom));
         }
-        predictions = predictions.OrderBy((v) => -v.Score).ToList();
-        predictions = predictions.Take(count + 1).ToList();
+        predictions = predictions.OrderBy((v) => -v.Score).Take(count + 1).ToList();
 
-        var recs = new List<Rec<V>>();
+        var recs = new List<Rec<V>>(count);
         foreach (var prediction in predictions)
         {
             if (prediction.Id != i)
