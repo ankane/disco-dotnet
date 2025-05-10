@@ -24,14 +24,14 @@ public static class Data
             "06416e597f82b7342361e41163890c81036900f418ad91315590814211dca490"
         );
 
-        var movies = new Dictionary<string, string>();
+        var movies = new Dictionary<string, string>(1682);
         foreach (var line in File.ReadLines(itemPath))
         {
             var row = line.Split("|");
             movies[row[0]] = row[1];
         }
 
-        var data = new Dataset<int, string>();
+        var data = new Dataset<int, string>(100000);
         foreach (var line in File.ReadLines(dataPath))
         {
             var row = line.Split("\t");
