@@ -214,7 +214,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         if (i == null)
             return null;
 
-        return userFactors.Row((int)i);
+        return userFactors.Row((int)i).ToArray();
     }
 
     public float[]? ItemFactors(U itemId)
@@ -223,7 +223,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         if (i == null)
             return null;
 
-        return itemFactors.Row((int)i);
+        return itemFactors.Row((int)i).ToArray();
     }
 
     public float GlobalMean()
@@ -257,7 +257,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         return recs.Take(count).ToArray();
     }
 
-    private float Dot(float[] a, float[] b)
+    private float Dot(ReadOnlySpan<float> a, ReadOnlySpan<float> b)
     {
         var sum = 0.0f;
         for (var i = 0; i < a.Length; i++)

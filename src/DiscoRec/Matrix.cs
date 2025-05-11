@@ -15,10 +15,10 @@ internal class Matrix
         Data = data;
     }
 
-    public float[] Row(int row)
+    public Span<float> Row(int row)
     {
         var start = row * Cols;
-        return Data[start..(start + Cols)];
+        return new Span<float>(Data, start, Cols);
     }
 
     public float[] Norms()
