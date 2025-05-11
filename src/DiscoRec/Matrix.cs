@@ -6,19 +6,19 @@ internal class Matrix
 {
     internal int Rows;
     private int Cols;
-    private float[] Data;
+    private ReadOnlyMemory<float> Data;
 
-    public Matrix(int rows, int cols, float[] data)
+    public Matrix(int rows, int cols, ReadOnlyMemory<float> data)
     {
         Rows = rows;
         Cols = cols;
         Data = data;
     }
 
-    public Span<float> Row(int row)
+    public ReadOnlySpan<float> Row(int row)
     {
         var start = row * Cols;
-        return new Span<float>(Data, start, Cols);
+        return Data.Span.Slice(start, Cols);
     }
 
     public float[] Norms()
