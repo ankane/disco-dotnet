@@ -154,6 +154,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         return new Recommender<T, U>(userMap, itemMap, rated, globalMean, userFactors, itemFactors);
     }
 
+    // TODO return IList<Rec<U>>
     public Rec<U>[] UserRecs(T userId, int count)
     {
         var u = UserMap.Get(userId);
@@ -177,16 +178,18 @@ public class Recommender<T, U> where T : notnull where U : notnull
         return recs.Take(count).ToArray();
     }
 
+    // TODO return IList<Rec<U>>
     public Rec<U>[] ItemRecs(U itemId, int count)
     {
         ItemNorms ??= itemFactors.Norms();
-        return Similar(ItemMap, itemFactors, ItemNorms, itemId, count);
+        return Similar(ItemMap, itemFactors, ItemNorms, itemId, count).ToArray();
     }
 
+    // TODO return IList<Rec<T>>
     public Rec<T>[] SimilarUsers(T userId, int count)
     {
         UserNorms ??= userFactors.Norms();
-        return Similar(UserMap, userFactors, UserNorms, userId, count);
+        return Similar(UserMap, userFactors, UserNorms, userId, count).ToArray();
     }
 
     public float Predict(T userId, U itemId)
@@ -202,12 +205,15 @@ public class Recommender<T, U> where T : notnull where U : notnull
         return Dot(userFactors.Row((int)u), itemFactors.Row((int)i));
     }
 
+    // TODO return IReadOnlyList<T>
     public T[] UserIds()
-        => UserMap.Ids();
+        => UserMap.Ids().ToArray();
 
+    // TODO return IReadOnlyList<U>
     public U[] ItemIds()
-        => ItemMap.Ids();
+        => ItemMap.Ids().ToArray();
 
+    // TODO return ReadOnlySpan<float>
     public float[]? UserFactors(T userId)
     {
         var i = UserMap.Get(userId);
@@ -217,6 +223,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         return userFactors.Row((int)i).ToArray();
     }
 
+    // TODO return ReadOnlySpan<float>
     public float[]? ItemFactors(U itemId)
     {
         var i = ItemMap.Get(itemId);
@@ -229,7 +236,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
     public float GlobalMean()
         => globalMean;
 
-    private Rec<V>[] Similar<V>(Map<V> map, Matrix factors, float[] norms, V id, int count) where V : notnull
+    private IList<Rec<V>> Similar<V>(Map<V> map, Matrix factors, float[] norms, V id, int count) where V : notnull
     {
         var i = map.Get(id);
         if (i == null)
@@ -254,7 +261,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
             if (prediction.Id != i)
                 recs.Add(new Rec<V>(map.Lookup(prediction.Id), prediction.Score));
         }
-        return recs.Take(count).ToArray();
+        return recs.Take(count).ToList();
     }
 
     private float Dot(ReadOnlySpan<float> a, ReadOnlySpan<float> b)

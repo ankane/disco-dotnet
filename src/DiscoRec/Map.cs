@@ -42,6 +42,6 @@ internal class Map<T> where T : notnull
     public T Lookup(int index)
         => Vec[index];
 
-    public T[] Ids()
-        => Vec.ToArray();
+    public IReadOnlyList<T> Ids()
+        => Vec;
 }
