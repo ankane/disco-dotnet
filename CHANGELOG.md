@@ -1,6 +1,6 @@
 ## 0.1.2 (unreleased)
 
-- Reduced allocations
+- Improved performance
 
 ## 0.1.1 (2024-11-15)
 
