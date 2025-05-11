@@ -1,8 +1,8 @@
-namespace DiscoRec;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+namespace DiscoRec;
 
 internal class Rating<T, U> where T : notnull where U : notnull
 {

@@ -1,6 +1,6 @@
-namespace DiscoRec;
-
 using System;
+
+namespace DiscoRec;
 
 internal class Matrix
 {

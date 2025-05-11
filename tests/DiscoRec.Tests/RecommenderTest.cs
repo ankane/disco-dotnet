@@ -1,7 +1,5 @@
 namespace DiscoRec.Tests;
 
-using DiscoRec;
-
 public class RecommenderTest
 {
     [Fact]

@@ -1,7 +1,7 @@
-namespace DiscoRec;
-
 using System;
 using System.Collections.Generic;
+
+namespace DiscoRec;
 
 internal class Map<T> where T : notnull
 {
