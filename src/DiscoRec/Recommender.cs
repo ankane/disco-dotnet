@@ -220,7 +220,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         if (i == null)
             return null;
 
-        return userFactors.Row((int)i).ToArray();
+        return userFactors.Row(i.Value).ToArray();
     }
 
     // TODO return ReadOnlySpan<float>
@@ -230,7 +230,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         if (i == null)
             return null;
 
-        return itemFactors.Row((int)i).ToArray();
+        return itemFactors.Row(i.Value).ToArray();
     }
 
     public float GlobalMean()
