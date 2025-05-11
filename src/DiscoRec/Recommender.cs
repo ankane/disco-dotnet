@@ -172,7 +172,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
         foreach (var prediction in predictions)
         {
             if (!rated.Contains(prediction.Id))
-                recs.Add(new Rec<U>(ItemMap.Ids()[prediction.Id], prediction.Score));
+                recs.Add(new Rec<U>(ItemMap.Lookup(prediction.Id), prediction.Score));
         }
         return recs.Take(count).ToArray();
     }
