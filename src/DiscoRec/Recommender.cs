@@ -44,14 +44,14 @@ public class Recommender<T, U> where T : notnull where U : notnull
 {
     private Map<T> UserMap;
     private Map<U> ItemMap;
-    private Dictionary<int, HashSet<int>> Rated;
+    private List<HashSet<int>> Rated;
     private float globalMean;
     private Matrix userFactors;
     private Matrix itemFactors;
     private float[]? UserNorms;
     private float[]? ItemNorms;
 
-    private Recommender(Map<T> userMap, Map<U> itemMap, Dictionary<int, HashSet<int>> rated, float globalMean, Matrix userFactors, Matrix itemFactors)
+    private Recommender(Map<T> userMap, Map<U> itemMap, List<HashSet<int>> rated, float globalMean, Matrix userFactors, Matrix itemFactors)
     {
         UserMap = userMap;
         ItemMap = itemMap;
@@ -92,7 +92,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
 
         var userMap = new Map<T>();
         var itemMap = new Map<U>();
-        var rated = new Dictionary<int, HashSet<int>>();
+        var rated = new List<HashSet<int>>();
 
         var input = new List<MatrixValue>(trainSet.Count);
         foreach (var v in trainSet.Data)
@@ -100,7 +100,7 @@ public class Recommender<T, U> where T : notnull where U : notnull
             var u = userMap.Add(v.UserId);
             // TODO improve
             if (u == userMap.Count - 1)
-                rated.TryAdd(u, new HashSet<int>());
+                rated.Add(new HashSet<int>());
             var i = itemMap.Add(v.ItemId);
             input.Add(new MatrixValue(u, i, v.Value));
             rated[u].Add(i);
