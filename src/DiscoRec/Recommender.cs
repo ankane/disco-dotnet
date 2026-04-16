@@ -1,5 +1,6 @@
 using Microsoft.ML;
 using Microsoft.ML.Data;
+using Microsoft.ML.Runtime;
 using Microsoft.ML.Trainers;
 using System;
 using System.Collections.Generic;
@@ -112,8 +113,6 @@ public class Recommender<T, U> where T : notnull where U : notnull
         var globalMean = isImplicit ? 0 : input.Sum((v) => v.Label) / input.Count;
 
         MLContext mlContext = new MLContext();
-        // for debugging
-        // mlContext.Log += (sender, e) => Console.WriteLine(e.Message);
         var schema = SchemaDefinition.Create(typeof(MatrixValue));
         schema[0].ColumnType = new KeyDataViewType(typeof(uint), users);
         schema[1].ColumnType = new KeyDataViewType(typeof(uint), items);
@@ -134,6 +133,12 @@ public class Recommender<T, U> where T : notnull where U : notnull
         var factors = options.Factors;
         var loss = isImplicit ? MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass : MatrixFactorizationTrainer.LossFunctionType.SquareLossRegression;
         var verbose = options.Verbose ?? validSet != null;
+
+        mlContext.Log += (sender, e) =>
+        {
+            if (verbose && e.Kind == ChannelMessageKind.Warning)
+                Console.WriteLine(e.RawMessage);
+        };
 
         var trainerOptions = new MatrixFactorizationTrainer.Options
         {
