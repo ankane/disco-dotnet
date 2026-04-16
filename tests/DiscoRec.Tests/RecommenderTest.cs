@@ -123,6 +123,17 @@ public class RecommenderTest
     }
 
     [Fact]
+    public async Task TestValidationSetImplicit()
+    {
+        var data = await Data.LoadMovieLens();
+
+        var (trainSet, validSet) = data.SplitRandom(0.8f);
+        Assert.Equal(80000, trainSet.Count);
+        Assert.Equal(20000, validSet.Count);
+        Recommender<int, string>.FitImplicit(trainSet, validSet, new RecommenderOptions { Factors = 20, Verbose = false });
+    }
+
+    [Fact]
     public void TestUserRecsNewUser()
     {
         var data = new Dataset<int, int>();
